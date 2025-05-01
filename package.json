@@ -9,12 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^10.0.7",
+    "@react-three/postprocessing": "^3.0.4",
     "@types/dat.gui": "^0.7.13",
+    "@whatisjery/react-fluid-distortion": "^1.4.4",
     "dat.gui": "^0.7.9",
+    "leva": "^0.10.0",
     "matter-attractors": "^0.1.6",
     "matter-js": "^0.20.0",
     "matter-wrap": "^0.2.0",
     "next": "15.3.1",
+    "postprocessing": "^6.37.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
