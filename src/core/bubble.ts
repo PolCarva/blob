@@ -7,6 +7,7 @@ import randomArrayElement from '@/utils/random-array-element';
 import uniqueId from '@/utils/unique-id';
 
 import type { RgbColorArray } from '@/utils/hex-to-rgb-array';
+import type { Project } from '@/types/project';
 
 /**
  * Normalize a color to an RGB array
@@ -328,6 +329,7 @@ export interface AdditionalBodyDefinition {
   itsConstraint?: Matter.Constraint | null;
 }
 
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 declare module 'matter-js' {
   export interface IBodyDefinition extends AdditionalBodyDefinition {}
 }
@@ -977,7 +979,6 @@ export function createBubble(
         //
         // We order them like so, so that when we draw with
         // gl.TRIANGLE_STRIP, we draw triangle ABC and BCD.
-        /* eslint-disable indent, no-multi-spaces */
         const vertexData = new Float32Array([
           -1.0,
           1.0, // top left (A)
@@ -988,7 +989,6 @@ export function createBubble(
           1.0,
           -1.0, // bottom right (D)
         ]);
-        /* eslint-enable indent, no-multi-spaces */
         const vertexDataBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, vertexDataBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, vertexData, gl.STATIC_DRAW);

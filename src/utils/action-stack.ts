@@ -1,6 +1,5 @@
 import uniqueId from '@/utils/unique-id';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type InputObject = Record<string, any>;
 
 interface ActionConfig<T extends InputObject = InputObject> {

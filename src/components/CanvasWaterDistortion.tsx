@@ -17,28 +17,34 @@ const WaterMaterial = shaderMaterial(
   renderFragmentShader
 )
 extend({ WaterMaterial })
-
 function WaterPlane() {
-  const material = useRef()
+  const material = useRef<any>(null)
   const { size } = useThree()
 
   useEffect(() => {
-    material.current.uniforms.resolution.value.set(size.width, size.height)
-    const handleMouse = (e: MouseEvent) => {
-      material.current.uniforms.mouse.value.set(e.clientX, size.height - e.clientY)
+    if (material.current) {
+      material.current.resolution.set(size.width, size.height)
+      const handleMouse = (e: MouseEvent) => {
+        if (material.current) {
+          material.current.mouse.set(e.clientX, size.height - e.clientY)
+        }
+      }
+      
+      window.addEventListener('mousemove', handleMouse)
+      return () => window.removeEventListener('mousemove', handleMouse)
     }
-    window.addEventListener('mousemove', handleMouse)
-    return () => window.removeEventListener('mousemove', handleMouse)
   }, [size])
 
   useFrame((state) => {
-    material.current.uniforms.time.value = state.clock.getElapsedTime()
+    if (material.current) {
+      material.current.uniforms.time.value = state.clock.getElapsedTime()
+    }
   })
 
   return (
     <mesh>
       <planeGeometry args={[2, 2]} />
-      {/* @ts-ignore */}
+      {/* @ts-expect-error */}
       <waterMaterial ref={material} transparent />
     </mesh>
   )

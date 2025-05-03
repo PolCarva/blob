@@ -5,11 +5,11 @@ const svgText = encodeURIComponent(`
   <svg width="100vw" height="100vh" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <filter id="noise">
-        <feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="0.5" stitchTiles="stitch"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="0.01" stitchTiles="stitch"/>
         <feColorMatrix type="saturate" values="0"/>
       </filter>
       <filter id="texture">
-        <feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="0.2" stitchTiles="stitch"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="0.01" stitchTiles="stitch"/>
         <feDisplacementMap in="SourceGraphic" scale="1"/>
       </filter>
     </defs>
@@ -27,6 +27,8 @@ export default function RipplesTitle() {
 
   useEffect(() => {
     if (typeof window === 'undefined' || !ref.current) return
+
+    const localRef = ref.current
 
     // Carga jQuery si no está presente
     function loadScript(src: string) {
@@ -49,8 +51,8 @@ export default function RipplesTitle() {
         await loadScript('https://cdn.jsdelivr.net/npm/jquery.ripples@0.6.3/dist/jquery.ripples.min.js')
       }
       // Aplica el efecto
-      if (ref.current && (window as any).jQuery) {
-        (window as any).jQuery(ref.current).ripples({
+      if (localRef && (window as any).jQuery) {
+        (window as any).jQuery(localRef).ripples({
           resolution: 512,
           dropRadius: 20,
           perturbance: 0.04,
@@ -62,8 +64,8 @@ export default function RipplesTitle() {
 
     return () => {
       // Limpia el efecto al desmontar
-      if (ref.current && (window as any).jQuery && (window as any).jQuery.fn.ripples) {
-        (window as any).jQuery(ref.current).ripples('destroy')
+      if (localRef && (window as any).jQuery && (window as any).jQuery.fn.ripples) {
+        (window as any).jQuery(localRef).ripples('destroy')
       }
     }
   }, [])
