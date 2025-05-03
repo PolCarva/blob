@@ -1,5 +1,6 @@
 import React from 'react'
 import Blob from '@/components/Blob'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -24,7 +25,7 @@ export default function Home() {
         }}
       />
       <div className="fixed inset-0 z-0 grid place-items-center">
-        <h1 className="text-4xl z-0 font-bold text-black">Pablo Carvalho</h1>
+        <Link href="/test" className="text-4xl hover:text-white transition-colors duration-300 z-0 font-bold text-black">Inicio</Link>
       </div>
     </main>
   )

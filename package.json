@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@react-three/drei": "^10.0.7",
+    "@react-three/fiber": "^9.1.2",
     "@react-three/postprocessing": "^3.0.4",
     "@types/dat.gui": "^0.7.13",
+    "@types/three": "^0.176.0",
     "@whatisjery/react-fluid-distortion": "^1.4.4",
     "dat.gui": "^0.7.9",
     "jquery": "^3.7.1",
@@ -23,7 +25,8 @@
     "postcss": "^8.5.3",
     "postprocessing": "^6.37.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three": "^0.176.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

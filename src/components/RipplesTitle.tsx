@@ -2,13 +2,24 @@
 import { useEffect, useRef } from 'react'
 
 const svgText = encodeURIComponent(`
-  <svg width="800" height="200" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100%" height="100%" fill="#f97316"/>
+  <svg width="100vw" height="100vh" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="noise">
+        <feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="0.5" stitchTiles="stitch"/>
+        <feColorMatrix type="saturate" values="0"/>
+      </filter>
+      <filter id="texture">
+        <feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="0.2" stitchTiles="stitch"/>
+        <feDisplacementMap in="SourceGraphic" scale="1"/>
+      </filter>
+    </defs>
+    <rect width="100%" height="100%" fill="#010101" filter="url(#noise)" opacity="0.05"/>
     <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-      font-size="80" font-family="sans-serif" font-weight="bold" fill="white">
-      Pablo Carvalho
+      font-size="10vw" font-family="Gabarito" font-weight="bold" fill="#fafafa" filter="url(#texture)">
+      pablo carvalho
     </text>
   </svg>
+  
 `)
 
 export default function RipplesTitle() {

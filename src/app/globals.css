@@ -1,7 +1,17 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Gabarito';
+  src: url('/fonts/Gabarito-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
-@theme {
-  --color-black: #010101;
-  --color-white: #fafafa;
+@layer base {
+  :root {
+    --color-black: #010101;
+    --color-white: #fafafa;
+    --font-family-gabarito: "Gabarito", sans-serif;
+  }
 }
