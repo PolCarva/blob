@@ -9,8 +9,8 @@ export default function Page() {
         <h1 className='sr-only'>pablo carvalho | full stack developer based on uruguay</h1>
       
       </div>
-      <div className='min-h-screen grid grid-cols-2 relative items-center justify-center bg-white'>
-        <div className='w-full h-full'>
+      <div className='min-h-screen grid xl:grid-cols-2 grid-cols-1 relative items-center justify-center bg-white'>
+        <div className='w-full h-full bg-red-500'>
         </div>
         <div className='w-full h-full'>
           <SkillsCloud/>

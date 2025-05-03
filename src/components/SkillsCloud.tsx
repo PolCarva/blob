@@ -3,18 +3,19 @@ import { useRef, useEffect, useState, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { Html } from '@react-three/drei'
+import useScreenSize from '@/hooks/useScreenSize'
 
 const skills = [
-    { text: 'innovation', mode: 'dark', position: [0 * 0.86, 2.5 * 0.86, 0 * 0.86], rotation: 5, scale: [1.2, 1.2, 1], zIndex: 1 },
-    { text: 'passion', mode: "dark", position: [-2 * 0.86, 1.5 * 0.86, 0.5 * 0.86], rotation: 0, scale: [1.1, 1.1, 1], zIndex: 2 },
-    { text: 'finance', mode: "light", position: [2 * 0.86, 1.5 * 0.86, 0.5 * 0.86], rotation: -1, scale: [1, 1, 1], zIndex: 2 },
-    { text: 'leadership', mode: "light", position: [0 * 0.86, 1 * 0.86, 0.5 * 0.86], rotation: 3, scale: [1, 1, 1], zIndex: 1 },
-    { text: 'recruiting', mode: "dark", position: [2.5 * 0.86, 0 * 0.86, 0.5 * 0.86], rotation: 3, scale: [1.1, 1.1, 1], zIndex: 2 },
-    { text: 'marketing', mode: "light", position: [-2.5 * 0.86, 0 * 0.86, 0.5 * 0.86], rotation: -4, scale: [1.1, 1.1, 1], zIndex: 2 },
-    { text: 'sales', mode: "light", position: [0 * 0.86, -0.5 * 0.86, 0 * 0.86], rotation: 4, scale: [1, 1, 1], zIndex: 1 },
-    { text: 'project', mode: "dark", position: [-1.5 * 0.86, -1.5 * 0.86, 0.5 * 0.86], rotation: -4, scale: [1.2, 1.2, 1], zIndex: 2 },
-    { text: 'DEI', mode: "light", position: [-2 * 0.86, -2.5 * 0.86, 0 * 0.86], rotation: 0, scale: [1, 1, 1], zIndex: 1 },
-    { text: 'product', mode: "light", position: [2 * 0.86, -2 * 0.86, 0 * 0.86], rotation: 0, scale: [1.2, 1.2, 1], zIndex: 2 },
+    { text: 'innovation', mode: 'dark', position: [0, 2.5, 0], rotation: 5, scale: [1.2, 1.2, 1], zIndex: 1 },
+    { text: 'passion', mode: "dark", position: [-2, 1.5, 0.5], rotation: 0, scale: [1.1, 1.1, 1], zIndex: 2 },
+    { text: 'finance', mode: "light", position: [2, 1.5, 0.5], rotation: -1, scale: [1, 1, 1], zIndex: 2 },
+    { text: 'leadership', mode: "light", position: [0, 1, 0.5], rotation: 3, scale: [1, 1, 1], zIndex: 1 },
+    { text: 'recruiting', mode: "dark", position: [2, 0, 0.5], rotation: 3, scale: [1.1, 1.1, 1], zIndex: 2 },
+    { text: 'marketing', mode: "light", position: [-2.5, 0, 0.5], rotation: -4, scale: [1.1, 1.1, 1], zIndex: 2 },
+    { text: 'sales', mode: "light", position: [0, -0.5, 0], rotation: 4, scale: [1, 1, 1], zIndex: 1 },
+    { text: 'project', mode: "dark", position: [-1.5, -1.5, 0.5], rotation: -4, scale: [1.2, 1.2, 1], zIndex: 2 },
+    { text: 'DEI', mode: "light", position: [-2, -2.5, 0], rotation: 0, scale: [1, 1, 1], zIndex: 1 },
+    { text: 'product', mode: "light", position: [2, -2, 0], rotation: 0, scale: [1.2, 1.2, 1], zIndex: 2 },
 ]
 
 type SkillTagProps = {
@@ -26,17 +27,22 @@ type SkillTagProps = {
 }
 
 function SkillTag({ text, mode, position, scale, rotation }: SkillTagProps) {
+    const size = useScreenSize()
+    const isMobile = size.isMobile
+    const isTablet = size.isTablet
+    const variation = isMobile ? 0.6 : isTablet ? 0.86 : 0.8
+    position = [position[0] * variation, position[1] * variation, position[2] * variation]
     return (
         <group position={position} scale={scale}>
             <Html
                 center
                 transform={false}
+                className='text-lg sm:text-2xl md:text-3xl lg:text-4xl -translate-x-10'
                 style={{
                     transform: `rotate(${rotation}deg)`,
                     color: mode === 'dark' ? '#2d241b' : '#fffbe2',
                     fontWeight: 700,
                     fontFamily: 'Gabarito, sans-serif',
-                    fontSize: '1.5vw',
                     pointerEvents: 'none',
                     userSelect: 'none',
                     background: mode === 'dark' ? '#fffbe2' : '#2d241b',
@@ -105,7 +111,6 @@ export default function SkillsCloud() {
     return (
         <div className="w-full h-full overflow-hidden">
             <Canvas camera={{ position: [0, 0, 12], fov: 50 }}>
-                <ambientLight intensity={0.7} />
                 <SkillsGroup mouse={mouse} />
             </Canvas>
         </div>
