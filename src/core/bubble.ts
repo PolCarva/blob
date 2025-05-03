@@ -445,7 +445,6 @@ export function createBubble(
     const maxBreath = settings.maxBreath;
     const minBreath = settings.minBreath;
 
-    // Set body background color to prevent white flashes on window resize
     function setBodyBg(color: string | RgbColorArray): void {
       const formattedBgStr =
         typeof color === 'string'

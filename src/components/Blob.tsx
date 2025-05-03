@@ -8,9 +8,10 @@ interface BlobProps {
   start?: boolean
   appear?: boolean
   settings: Partial<BubbleSettings>
+  className?: string
 }
 
-export default function Blob({ start = true, appear = true, settings }: BlobProps) {
+export default function Blob({ start = true, appear = true, settings, className }: BlobProps) {
   const elementRef = useRef<HTMLDivElement>(null)
   const bubbleRef = useRef<ReturnType<typeof createBubble> | null>(null)
 
@@ -76,7 +77,7 @@ export default function Blob({ start = true, appear = true, settings }: BlobProp
   return (
     <div 
       ref={elementRef} 
-      className="fixed inset-0 w-full h-full"
+      className={`fixed inset-0 w-full h-full ${className}`}
       style={{ zIndex: 0 }}
     />
   )
